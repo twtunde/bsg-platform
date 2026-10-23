@@ -1,0 +1,9 @@
+{
+  "name": "BCG",
+  "symbol": "BCG",
+  "decimals": "9",
+  "image": "https://twtunde.github.io/bsg-platform/assets/brand/bcg-token-512.png",
+  "description": "BCG, the governance token of the BSG trading platform on TON. Fixed supply of 1,000,000,000, minted once. Holders govern fees, treasury and roadmap through BCGGovernor.",
+  "social": ["https://twtunde.github.io/bcg-docs/"],
+  "websites": ["https://twtunde.github.io/bcg-docs/"]
+}

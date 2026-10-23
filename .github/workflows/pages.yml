@@ -1,0 +1,34 @@
+name: pages
+# Publishes twtunde.github.io/bsg-platform: the BCG token's metadata at the address written into its Jetton master on
+# mainnet (assets/bcg.json and the images it names in assets/brand/), which can never move. Every other path forwards
+# to the documents at twtunde.github.io/bcg-docs (index.html, 404.html).
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+concurrency: { group: pages, cancel-in-progress: true }
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Assemble
+        run: |
+          mkdir -p _site
+          cp -r index.html 404.html assets _site/
+          touch _site/.nojekyll
+      - uses: actions/upload-pages-artifact@v3
+        with: { path: _site }
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - id: deployment
+        uses: actions/deploy-pages@v4
